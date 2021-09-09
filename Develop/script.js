@@ -8,13 +8,14 @@ var specialCharactere = ['!', '@', '#', '$', "%", '^', '&', '*', '(', ')', '_', 
 
 
 function questions() {
-  var isValid = false;
+  var isCorrect = false;
   do {
     var passwordLength = prompt("Please be mindfull that the password must be at least 8 characters and no more than 128 characters ");
     var askUpperCaseLetter = confirm("Do you require a password With upper case letters?");
     var askLowerCaseLetter = confirm("Do you require a password With lower case letters?");
     var askNumericCharactere = confirm("Do you require a password With numbers?");
     var askSpecialCharactere = confirm("Do you require a password With special characters?");
+    
     var responses = {
       passwordLength: passwordLength,
       askUpperCaseLetter: askUpperCaseLetter,
@@ -27,12 +28,12 @@ function questions() {
     else if((!askUpperCaseLetter)&&(!askLowerCaseLetter)&&(!askNumericCharactere)&&(!askSpecialCharactere))
     alert("You need to choose on at least one of the requiremnents.");
     else
-    isValid = true;
+    isCorrect = true;
 
-  } while(!isValid);
+  } while(!isCorrect);
   return responses;
 }
-// This function joins all the user responses and then creates the result - a strong password.
+
 function generatePassword() {
   var passwordIdeas = questions();
   var mix = [];
@@ -40,18 +41,21 @@ function generatePassword() {
 
 
 
-  if (passwordIdeas.askNumericCharactere) {
-    for (var i of numericCharactere)
-      mix.push(i);
-  }
-  if (passwordIdeas.askLowerCase) {
-    for (var i of lowerCaseLetter)
-      mix.push(i);
-  }
   if (passwordIdeas.askUpperCaseLetter) {
     for (var i of upperCaseLetter)
       mix.push(i);
   }
+
+  if (passwordIdeas.askLowerCaseLetter) {
+    for (var i of lowerCaseLetter)
+      mix.push(i);
+  }
+
+  if (passwordIdeas.askNumericCharactere) {
+    for (var i of numericCharactere)
+      mix.push(i);
+  }
+  
   if (passwordIdeas.askSpecialCharactere) {
     for (var i of specialCharactere)
       mix.push(i);
